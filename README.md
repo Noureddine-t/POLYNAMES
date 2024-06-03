@@ -1,2 +1,2 @@
 # POLYNAMES
-Web app based on CodeNames game
+Web app based on Codenames game
