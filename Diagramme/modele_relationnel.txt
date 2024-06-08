@@ -1,5 +1,0 @@
-player(player_id, user_name, role, password, game_id)
-game(game_id, code , score, game_board_id)
-game_board(game_board_id, word , color)
-dictionary(dictionary_id, words)
-include(game_board_id , dictionary_id)
