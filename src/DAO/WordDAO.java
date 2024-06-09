@@ -38,4 +38,19 @@ public class WordDAO {
         }
         return words;
     }
+
+    public List<String> find25WordLabel() {
+        List<String> words = new ArrayList<>();
+        String query = "SELECT label FROM word ORDER BY RAND() LIMIT 25";
+        try {
+            PreparedStatement preparedStatement = this.db.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                words.add(resultSet.getString("label"));
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des mots : " + e.getMessage());
+        }
+        return words;
+    }
 }
