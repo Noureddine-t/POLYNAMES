@@ -2,13 +2,9 @@ package DAO;
 
 import database.PolyNamesDatabase;
 import models.Participate;
-import models.Player;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ParticipateDAO {
     private PolyNamesDatabase db;
@@ -21,6 +17,16 @@ public class ParticipateDAO {
         }
     }
 
-   //TODO
-
+    public void createParticipate(Participate participate) {
+        String query = "INSERT INTO participate (role, game_id, player_id) VALUES (?, ?, ?)";
+        try {
+            PreparedStatement preparedStatement = this.db.prepareStatement(query);
+            preparedStatement.setString(1, participate.role());
+            preparedStatement.setInt(2, participate.game_id());
+            preparedStatement.setInt(3, participate.player_id());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la création de l'instance Participate : " + e.getMessage());
+        }
+    }
 }
