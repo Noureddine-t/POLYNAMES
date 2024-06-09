@@ -1,9 +1,8 @@
 package models;
 
 public record Player(
-        int player_id,
+        int id,
         String username,
-        String role,
         String password,
         int game_id
 ) {}

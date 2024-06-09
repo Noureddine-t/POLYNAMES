@@ -1,9 +1,8 @@
 package models;
 
 public record Game (
-        int game_id,
+        int id,
         String code,
-        int score,
-        int game_board_id
+        int score
 
 ){}

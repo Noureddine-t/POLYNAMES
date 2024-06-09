@@ -1,6 +1,8 @@
 package models;
 
 public record Include(
-        int game_board_id,
-        int dictionary_id
+        int id,
+        String color,
+        int game_id,
+        int word_id
 ){}

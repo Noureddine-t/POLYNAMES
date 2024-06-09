@@ -1,8 +1,10 @@
 import webserver.WebServer;
 
-public class Main {
-    public static void main(String[] args) {
-        WebServer server = new WebServer();
+import java.io.IOException;
 
+public class Main {
+    public static void main(String[] args) throws IOException {
+        WebServer server = new WebServer();
+        server.listen(8080);
     }
 }

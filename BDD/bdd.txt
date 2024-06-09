@@ -1,18 +1,26 @@
+Player(id, username, password, game_id)
+game(id, code, score)
+Word(id, label)
+Participate(id, role, player_id, game_id)
+Include(id, color, game_id, word_id)
+
 CREATE DATABASE IF NOT EXISTS poly_names;
 USE poly_names;
 
 CREATE TABLE Game (
     id INT AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(255) NOT NULL,
+    UNIQUE (code),
     score INT DEFAULT 0
 );
 
 
 CREATE TABLE Player (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     game_id INT,
+    UNIQUE (username),
     FOREIGN KEY (game_id) REFERENCES Game(id)
 );
 
