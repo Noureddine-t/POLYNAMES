@@ -2,7 +2,7 @@ package models;
 
 public record Participate(
         int id,
-        String role,
+        Role role,
         int game_id,
         int player_id
 ){}

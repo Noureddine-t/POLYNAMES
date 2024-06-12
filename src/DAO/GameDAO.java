@@ -8,9 +8,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
+/**
+ * DAO des parties de jeu
+ */
 public class GameDAO {
     private PolyNamesDatabase db;
 
+    /**
+     * Constructeur de la classe GameDAO
+     */
     public GameDAO() {
         try {
             this.db = new PolyNamesDatabase();
@@ -20,6 +26,11 @@ public class GameDAO {
     }
 
 
+    /**
+     * Créer une partie de jeu
+     *
+     * @return identifiant de la partie créée
+     */
     public String createGame() {
         String query = "INSERT INTO game (code) VALUES (?)";
 
@@ -41,7 +52,12 @@ public class GameDAO {
         }
     }
 
-
+    /**
+     * Chercher une partie de jeu à partir de son identifiant
+     *
+     * @param gameId identifiant de la partie cherchée
+     * @return La partie de jeu correspondant à l'identifiant gameId
+     */
     public Game findGameById(int gameId) {
         String query = "SELECT * FROM game WHERE id = ?";
         try {
@@ -61,6 +77,12 @@ public class GameDAO {
         return null;
     }
 
+    /**
+     * Chercher une partie de jeu à partir de son code
+     *
+     * @param code code de la partie cherchée
+     * @return La partie de jeu correspondant au code
+     */
     public Game findGameByCode(String code) {
         String query = "SELECT * FROM game WHERE code = ?";
         try {
@@ -80,37 +102,12 @@ public class GameDAO {
         return null;
     }
 
-    public int findGameIdByCode(String code) {
-        String query = "SELECT id FROM game WHERE code = ?";
-        try {
-            PreparedStatement preparedStatement = this.db.prepareStatement(query);
-            preparedStatement.setString(1, code);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                return resultSet.getInt("id");
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la recherche de l'ID par code " + code + ":" + e.getMessage());
-        }
-        return -1;
-    }
-
-    public String findCodeByGameId(int gameId) {
-        String query = "SELECT code FROM game WHERE id = ?";
-        try {
-            PreparedStatement preparedStatement = this.db.prepareStatement(query);
-            preparedStatement.setInt(1, gameId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                return resultSet.getString("code");
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la recherche du code par ID " + gameId + ":" + e.getMessage());
-        }
-        return null;
-    }
-
-
+    /**
+     * Mettre à jour le score d'une partie de jeu
+     *
+     * @param newScore nouveau score
+     * @param code     code de la partie
+     */
     public void updateScore(int newScore, String code) {
         String query = "UPDATE game SET score = ? WHERE code = ?";
         try {
@@ -123,6 +120,12 @@ public class GameDAO {
         }
     }
 
+    /**
+     * Mettre à jour le score d'une partie de jeu a partir de son identifiant
+     *
+     * @param newScore nouveau score
+     * @param id       identifiant de la partie
+     */
     public void updateScore(int newScore, int id) {
         String query = "UPDATE game SET score = ? WHERE id = ?";
         try {
@@ -135,6 +138,11 @@ public class GameDAO {
         }
     }
 
+    /**
+     * Supprimer une partie de jeu a partir de son identifiant
+     *
+     * @param gameId identifiant de la partie
+     */
     public void deleteGame(int gameId) {
         String query = "DELETE FROM game WHERE id = ?";
         try {
@@ -146,6 +154,12 @@ public class GameDAO {
             System.err.println("Erreur lors de la suppression du jeu par ID : " + e.getMessage());
         }
     }
+
+    /**
+     * Supprimer une partie de jeu a partir de son code
+     *
+     * @param code code de la partie
+     */
 
     public void deleteGame(String code) {
         String query = "DELETE FROM game WHERE code = ?";

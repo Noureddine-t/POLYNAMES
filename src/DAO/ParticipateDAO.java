@@ -1,13 +1,22 @@
 package DAO;
 
 import database.PolyNamesDatabase;
+import models.Participate;
+import models.Role;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * DAO des participations, permettant de gérer les rôles des joueurs dans les parties
+ */
 public class ParticipateDAO {
     private PolyNamesDatabase db;
 
+    /**
+     * Constructeur de la classe ParticipateDAO
+     */
     public ParticipateDAO() {
         try {
             this.db = new PolyNamesDatabase();
@@ -16,11 +25,18 @@ public class ParticipateDAO {
         }
     }
 
-    public void createParticipate(String role, int game_id, int player_id) {
+    /**
+     * Créer une participation
+     *
+     * @param role      rôle du joueur
+     * @param game_id   identifiant de la partie
+     * @param player_id identifiant du joueur
+     */
+    public void createParticipate(Role role, int game_id, int player_id) {
         String query = "INSERT INTO participate (role, game_id, player_id) VALUES (?, ?, ?)";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
-            preparedStatement.setString(1, role);
+            preparedStatement.setString(1, role.name());
             preparedStatement.setInt(2, game_id);
             preparedStatement.setInt(3, player_id);
             preparedStatement.executeUpdate();
@@ -30,7 +46,13 @@ public class ParticipateDAO {
     }
 
 
-    //provisoir
+    /**
+     * Mettre à jour le rôle d'une participation
+     *
+     * @param id      identifiant de la participation
+     * @param newRole nouveau rôle du joueur
+     */
+    //TODO DELETE THIS
     public void updateRole(int id, String newRole) {
         String query = "UPDATE participate SET role = ? WHERE id = ?";
         try {
@@ -43,30 +65,61 @@ public class ParticipateDAO {
         }
     }
 
-    public String getRole(int id) {
-        String role = null;
-        String query = "SELECT role FROM participate WHERE id = ?";
+
+    /**
+     * Lire une participation à partir de son identifiant
+     *
+     * @param id identifiant de la participation
+     * @return la participation correspondant à l'identifiant id
+     */
+    public Participate getParticipate(int id) {
+        String query = "SELECT * FROM participate WHERE id = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setInt(1, id);
-            role = preparedStatement.executeQuery().getString("role");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return new Participate(
+                        resultSet.getInt("id"),
+                        Role.valueOf(resultSet.getString("role")),
+                        resultSet.getInt("game_id"),
+                        resultSet.getInt("player_id")
+                );
+
+            }
         } catch (SQLException e) {
             System.err.println("Erreur lors de la lecture du role depuis d'ID : " + e.getMessage());
         }
-        return role;
+        return null;
     }
 
-    public String getRole(int gameId, int playerId) {
+    /**
+     * Lire une participation à partir de l'identifiant du jeu et du joueur
+     *
+     * @param gameId   identifiant de la partie
+     * @param playerId identifiant du joueur
+     * @return la participation correspondant à l'identifiant du jeu et du joueur
+     */
+    public Participate getParticipate(int gameId, int playerId) {
         String role = null;
-        String query = "SELECT role FROM participate WHERE game_id = ? AND player_id = ?";
+        String query = "SELECT * FROM participate WHERE game_id = ? AND player_id = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setInt(1, gameId);
             preparedStatement.setInt(2, playerId);
-            role = preparedStatement.executeQuery().getString("role");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return new Participate(
+                        resultSet.getInt("id"),
+                        Role.valueOf(resultSet.getString("role")),
+                        resultSet.getInt("game_id"),
+                        resultSet.getInt("player_id")
+                );
+
+            }
         } catch (SQLException e) {
             System.err.println("Erreur lors de la lecture du role depuis l'ID du jeu et du joueur : " + e.getMessage());
         }
-        return role;
+        return null;
     }
 }

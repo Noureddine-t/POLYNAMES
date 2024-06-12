@@ -1,8 +1,8 @@
 package models;
 
-public record Game (
+public record Game(
         int id,
         String code,
         int score
-
-){}
+) {
+}

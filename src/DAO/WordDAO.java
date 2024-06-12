@@ -9,9 +9,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO des mots
+ */
 public class WordDAO {
     private PolyNamesDatabase db;
 
+    /**
+     * Constructeur de la classe WordDAO
+     */
     public WordDAO() {
         try {
             this.db = new PolyNamesDatabase();
@@ -20,11 +26,18 @@ public class WordDAO {
         }
     }
 
-    public List<Word> find25Word() {
+    /**
+     * Chercher un mot à partir de son identifiant
+     *
+     * @param nbrWords identifiant du mot cherché
+     * @return Le mot correspondant à l'identifiant wordId
+     */
+    public List<Word> findWords(int nbrWords) {
         List<Word> words = new ArrayList<>();
-        String query = "SELECT * FROM word ORDER BY RAND() LIMIT 25";
+        String query = "SELECT * FROM word ORDER BY RAND() LIMIT ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
+            preparedStatement.setInt(1, nbrWords);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Word word = new Word(
@@ -39,18 +52,22 @@ public class WordDAO {
         return words;
     }
 
-    public List<String> find25WordLabel() {
-        List<String> words = new ArrayList<>();
-        String query = "SELECT label FROM word ORDER BY RAND() LIMIT 25";
+    public Word findWordByLabel(String label) {
+        String query = "SELECT * FROM word WHERE label = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
+            preparedStatement.setString(1, label);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                words.add(resultSet.getString("label"));
+            if (resultSet.next()) {
+                return new Word(
+                        resultSet.getInt("id"),
+                        resultSet.getString("label")
+                );
             }
         } catch (SQLException e) {
-            System.err.println("Erreur lors de la récupération des mots : " + e.getMessage());
+            System.err.println("Erreur lors de la récupération du mot : " + e.getMessage());
         }
-        return words;
+        return null;
     }
+
 }

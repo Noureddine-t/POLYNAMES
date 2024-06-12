@@ -1,4 +1,4 @@
-Player(id, username, password, game_id)
+Player(id, username, game_id)
 game(id, code, score)
 Word(id, label)
 Participate(id, role, player_id, game_id)
@@ -18,9 +18,7 @@ CREATE TABLE Game (
 CREATE TABLE Player (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
     game_id INT,
-    UNIQUE (username),
     FOREIGN KEY (game_id) REFERENCES Game(id)
 );
 
