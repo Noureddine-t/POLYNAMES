@@ -63,3 +63,7 @@ C
 Frontend/index.html,b\5\b5a0ad90d00c2e84c9dffb668da0bbae825db71e
 @
 Frontend/main.js,2\0\20e0cf9ce78a4e339329db0e46c45ed78b1cc42a
+K
+Frontend/libs/sse-client.js,0\1\01d5d4a423753a5bdb252072324ecf51c77e6ce9
+O
+src/webserver/WebServerSSE.java,5\d\5db4ed9bb064d9b6b857ea9bcee747499fe06d3d
