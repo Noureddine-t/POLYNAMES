@@ -1,5 +1,6 @@
 import webserver.WebServer;
 
+import java.io.File;
 import java.io.IOException;
 
 public class Main {
@@ -8,11 +9,8 @@ public class Main {
         server.listen(8080);
         server.getRouter().get("/game/:id", (context) -> {
             context.getResponse().ok("Game ID: " + context.getRequest().getParam("id"));
-            File file = new File("index.html");
-            he.sendResponseHeaders(200, file.length());
-            try (OutputStream os = he.getResponseBody()) {
-                Files.copy(file.toPath(), os);
-            }
+// TODO Afficher la page HTML du jeu: grille pour SEE
+            
         });
 
 

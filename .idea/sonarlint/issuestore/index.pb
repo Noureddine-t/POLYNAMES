@@ -3,8 +3,6 @@ K
 Frontend/testing/styles.css,2\b\2b6ec402d6e1e09310662a1764eb529eaee73bd1
 R
 "src/Controller/GameController.java,0\7\077b18b56d25c9390442a4d598207376590c3d96
-U
-%src/Controller/IncludeController.java,6\7\67f6cb491a2997c121ea41f253e0aa4aec7a59be
 ;
 BDD/bdd.txt,b\1\b1bbd948665cf15d8414f37cba6f215ba1b228fc
 Y
@@ -37,10 +35,6 @@ D
 src/DAO/WordDAO.java,5\0\5082faf1d2d05ee6faae73f7a0a7cabdf2f0957a
 G
 src/DAO/IncludeDAO.java,b\f\bffd041af7cd1c819276f4de1d4bb67ce6e2bd2d
-R
-"src/Controller/WordController.java,f\c\fcc6d829cfe42b7035a0b3f482e57aa9ffc3a677
-I
-src/models/GameColor.java,a\b\ab67a4bc78abd1e8329afcf77e68e083704e5d91
 I
 src/models/WordColor.java,4\a\4a4b52fdcdcebb79b49bbafecec7095f2d4909fa
 D
@@ -67,3 +61,16 @@ K
 Frontend/libs/sse-client.js,0\1\01d5d4a423753a5bdb252072324ecf51c77e6ce9
 O
 src/webserver/WebServerSSE.java,5\d\5db4ed9bb064d9b6b857ea9bcee747499fe06d3d
+K
+frontend/libs/sse-client.js,4\8\4832bdb79371b74be89ac46dae37dd2f3dbd0887
+K
+frontend/testing/styles.css,1\5\159492e9f7d2dace1caaa1bb3fe3dd34665fe29f
+T
+$frontend/testing/grid_intuition.html,3\b\3b9e345f2b2bd700c875588f37609f1a73b02f1b
+K
+frontend/testing/roles.html,6\6\664cb9974db36843d7eb3c5e84ae993ff07eb2e5
+C
+frontend/index.html,a\1\a12b0e66474192f8cb9a2db83f26413a588dec1d
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
