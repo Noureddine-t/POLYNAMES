@@ -1,15 +1,11 @@
-class SSESubscriptionException extends Error
-{
-    constructor(channel)
-    {
+class SSESubscriptionException extends Error {
+    constructor(channel) {
         super(`Unable to subscribe to '${channel}' channel`);
     }
 }
 
-class SSEUnsubscriptionException extends Error
-{
-    constructor(channel)
-    {
+class SSEUnsubscriptionException extends Error {
+    constructor(channel) {
         super(`Unable to unsubscribe from '${channel}' channel`);
     }
 }
@@ -20,9 +16,8 @@ export const SSEEvent = {
     CONNECTION_LOST: "connection-lost"
 }
 
-export class SSEClient extends EventTarget
-{
-    //Remote SSE Server Base URL 
+export class SSEClient extends EventTarget {
+    //Remote SSE Server Base URL
     #baseUrl;
 
     //SSE Client Id
@@ -36,12 +31,11 @@ export class SSEClient extends EventTarget
 
     /**
      * SSEClient constructor
-     * @param {string} baseUrl: Remote SSE Server Base URL 
+     * @param {string} baseUrl: Remote SSE Server Base URL
      */
-    constructor(baseUrl)
-    {
+    constructor(baseUrl) {
         super();
-        
+
         this.baseUrl = baseUrl;
         this.clientId = this.#loadClientId();
 
@@ -53,12 +47,10 @@ export class SSEClient extends EventTarget
      * Tries to load SSE Client Id from localStorage or generate a new one
      * @returns {string} Current SSE Client Id
      */
-    #loadClientId()
-    {
+    #loadClientId() {
         let uuid = sessionStorage.getItem(`sse-id-${this.baseUrl}`);
 
-        if (uuid == null)
-        {
+        if (uuid == null) {
             uuid = this.#generateClientId();
 
             this.#saveClientId(uuid);
@@ -69,10 +61,9 @@ export class SSEClient extends EventTarget
 
     /**
      * Saves current SSE Client Id into localStorage
-     * @param {string} clientId 
+     * @param {string} clientId
      */
-    #saveClientId(clientId)
-    {
+    #saveClientId(clientId) {
         sessionStorage.setItem(`sse-id-${this.baseUrl}`, clientId);
     }
 
@@ -80,8 +71,7 @@ export class SSEClient extends EventTarget
      * Generates a new SSE Client Id from UUID string
      * @returns {string} New SSE Client Id
      */
-    #generateClientId()
-    {
+    #generateClientId() {
         return crypto.randomUUID();
     }
 
@@ -89,21 +79,19 @@ export class SSEClient extends EventTarget
      * Tries to connect to open a SSE connection with the server
      * @returns {Promise<void>}
      */
-    async connect()
-    {
-        return new Promise((resolve, reject) =>
-        {
-            if (this.eventSource !== null)
-            {
+    async connect() {
+        return new Promise((resolve, reject) => {
+            if (this.eventSource !== null) {
                 resolve();
                 return;
             }
 
             this.eventSource = new EventSource(`//${this.baseUrl}/__sse/${this.clientId}`, {});
 
-            this.eventSource.onopen = () =>
-            {
-                this.eventSource.onerror = (error) => { this.dispatchEvent(new Event(SSEEvent.CONNECTION_LOST)) };
+            this.eventSource.onopen = () => {
+                this.eventSource.onerror = (error) => {
+                    this.dispatchEvent(new Event(SSEEvent.CONNECTION_LOST))
+                };
 
                 this.#renewSubscriptions();
 
@@ -112,9 +100,10 @@ export class SSEClient extends EventTarget
                 resolve();
             };
 
-            this.eventSource.onerror = () =>
-            {
-                this.eventSource.onerror = (error) => { this.dispatchEvent(new Event(SSEEvent.CONNECTION_ERROR)) };
+            this.eventSource.onerror = () => {
+                this.eventSource.onerror = (error) => {
+                    this.dispatchEvent(new Event(SSEEvent.CONNECTION_ERROR))
+                };
                 reject();
             }
         })
@@ -123,10 +112,8 @@ export class SSEClient extends EventTarget
     /**
      * Closes the SSE connection with the server
      */
-    async disconnect()
-    {
-        if (this.eventSource)
-        {
+    async disconnect() {
+        if (this.eventSource) {
             this.eventSource.close();
             this.eventSource = null;
         }
@@ -134,17 +121,15 @@ export class SSEClient extends EventTarget
 
     /**
      * Tries to subscribe to a channel
-     * @param {string} channel 
-     * @param {(any) => void} callback 
+     * @param {string} channel
+     * @param {(any) => void} callback
      * @returns {Promise<boolean>}
      */
-    async subscribe(channel, callback)
-    {
+    async subscribe(channel, callback) {
         if (callback === undefined)
             return false;
 
-        try
-        {
+        try {
             await this.#askForSubscription(channel);
 
             this.#memorizeChannel(channel, callback);
@@ -152,20 +137,17 @@ export class SSEClient extends EventTarget
             this.#attachEventListener(channel, callback);
 
             return true;
-        }
-        catch (error)
-        {
+        } catch (error) {
             return false;
         }
     }
 
     /**
      * Tries to unsubscribe from a server channel
-     * @param {string} channel 
+     * @param {string} channel
      */
-    async unsubscribe(channel)
-    {
-        const response = await fetch(`//${this.baseUrl}/__sse/${this.clientId}/channel/${channel}`, { method: "delete" });
+    async unsubscribe(channel) {
+        const response = await fetch(`//${this.baseUrl}/__sse/${this.clientId}/channel/${channel}`, {method: "delete"});
 
         if (response.status !== 200)
             throw new SSEUnsubscriptionException(channel);
@@ -174,49 +156,39 @@ export class SSEClient extends EventTarget
     }
 
     /**
-     * Tries 
-     * @param {*} channel 
+     * Tries
+     * @param {*} channel
      */
-    async #askForSubscription(channel)
-    {
-        const response = await fetch(`//${this.baseUrl}/__sse/${this.clientId}/channel/${channel}`, { method: "post" });
+    async #askForSubscription(channel) {
+        const response = await fetch(`//${this.baseUrl}/__sse/${this.clientId}/channel/${channel}`, {method: "post"});
 
         if (response.status !== 200)
             throw new SSESubscriptionException(channel);
     }
 
-    async #renewSubscriptions()
-    {
-        for (const channel of this.#subscribedChannels.keys())
-        {
+    async #renewSubscriptions() {
+        for (const channel of this.#subscribedChannels.keys()) {
             await this.#askForSubscription(channel);
         }
     }
 
-    #memorizeChannel(channel, callback)
-    {
+    #memorizeChannel(channel, callback) {
         if (this.#subscribedChannels.has(channel) == false)
             this.#subscribedChannels.set(channel, callback);
     }
 
-    #forgetChannel(channel)
-    {
+    #forgetChannel(channel) {
         if (this.#subscribedChannels.has(channel))
             this.#subscribedChannels.delete(channel);
     }
 
-    #attachEventListener(channel, callback)
-    {
-        this.eventSource.addEventListener(channel, (event) =>
-        {
+    #attachEventListener(channel, callback) {
+        this.eventSource.addEventListener(channel, (event) => {
             let data;
 
-            try
-            {
+            try {
                 data = JSON.parse(event.data);
-            }
-            catch (e)
-            {
+            } catch (e) {
                 data = {};
             }
 

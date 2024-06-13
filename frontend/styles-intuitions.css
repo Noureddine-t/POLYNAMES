@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    font-size: 5em;
+    font-weight: bold;
+    color: #0044cc;
+    text-shadow: 2px 2px 4px #aaa;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 100px);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.game-container {
+    display: flex;
+    justify-content: center; /* Centrer le contenu horizontalement */
+    align-items: center; /* Centrer le contenu verticalement */
+    width: 100%;
+    max-width: 1200px; /* Limiter la largeur pour éviter que tout ne soit trop étiré */
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #ddd;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.side-content {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.hint,
+.hint-number {
+    margin-bottom: 10px;
+}
+
+label {
+    margin: 5px 0;
+    color: #0044cc;
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 10px;
+    margin: 5px 0;
+    width: calc(100% - 20px);
+    border: 1px solid #0044cc;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #000000;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px 0;
+    background: #0044cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #003399;
+}
+
+.score {
+    margin-top: 20px;
+}
+
+footer {
+    background-color: #0044cc;
+    color: white;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+}

@@ -14,9 +14,9 @@ import java.util.Map;
  * Contrôleur pour la gestion des scores
  */
 public class ScoreController {
-    private final static Map<int, int> gameBlueCardCountMap = new HashMap<int, int>();
-    private final static Map<int, int> gameCurrentScoreMap = new HashMap<int, int>();
-    private final static Map<int, int> gameTurnScoreMap = new HashMap<int, int>();
+    private final static Map<Integer, Integer> gameBlueCardCountMap = new HashMap<>();
+    private final static Map<Integer, Integer> gameCurrentScoreMap = new HashMap<>();
+    private final static Map<Integer, Integer> gameTurnScoreMap = new HashMap<>();
 
     /**
      * Mettre à jour le score du jeu

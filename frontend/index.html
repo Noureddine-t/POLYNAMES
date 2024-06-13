@@ -1,71 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PolyNames</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Créer / Rejoindre une partie</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header>
     <h1>PolyNames</h1>
 </header>
-<main>
-    <section class="score-section">
-        <h2>Score: <span id="score">0</span></h2>
-    </section>
-    <section class="grid-section">
-        <div class="grid-container">
-            <!-- 25 word cells -->
-            <div class="grid-item">Word 1</div>
-            <div class="grid-item">Word 2</div>
-            <div class="grid-item">Word 3</div>
-            <div class="grid-item">Word 4</div>
-            <div class="grid-item">Word 5</div>
-            <div class="grid-item">Word 6</div>
-            <div class="grid-item">Word 7</div>
-            <div class="grid-item">Word 8</div>
-            <div class="grid-item">Word 9</div>
-            <div class="grid-item">Word 10</div>
-            <div class="grid-item">Word 11</div>
-            <div class="grid-item">Word 12</div>
-            <div class="grid-item">Word 13</div>
-            <div class="grid-item">Word 14</div>
-            <div class="grid-item">Word 15</div>
-            <div class="grid-item">Word 16</div>
-            <div class="grid-item">Word 17</div>
-            <div class="grid-item">Word 18</div>
-            <div class="grid-item">Word 19</div>
-            <div class="grid-item">Word 20</div>
-            <div class="grid-item">Word 21</div>
-            <div class="grid-item">Word 22</div>
-            <div class="grid-item">Word 23</div>
-            <div class="grid-item">Word 24</div>
-            <div class="grid-item">Word 25</div>
-        </div>
-    </section>
-    <section class="clue-section">
-        <div class="master-clue">
-            <h2>Master's Clue</h2>
-            <input type="text" id="masterClue" placeholder="Enter your clue">
-            <input type="number" id="clueValue" placeholder="Value">
-            <button id="submitClue">Submit Clue</button>
-        </div>
-        <div class="intuition-clue">
-            <h2>Intuition's Clue</h2>
-            <p id="displayedClue">No clue yet</p>
-        </div>
-    </section>
-    <section class="history-section">
-        <h2>History</h2>
-        <div id="historyContainer">
-            <!-- History entries will be added here -->
-        </div>
-    </section>
-</main>
+<div class="container">
+    <div class="form-container box">
+        <form action="#" method="post">
+            <h2>Créer une partie</h2>
+            <label for="username-create">Nom d'utilisateur:</label>
+            <input type="text" id="username-create" name="username-create" required>
+            <button type="submit">Créer</button>
+        </form>
+        <form action="#" method="post">
+            <h2>Rejoindre une partie</h2>
+            <label for="username-join">Nom d'utilisateur:</label>
+            <input type="text" id="username-join" name="username-join" required>
+            <label for="game-code-join">Code de la partie:</label>
+            <input type="text" id="game-code-join" name="game-code-join" required>
+            <button type="submit">Rejoindre</button>
+        </form>
+    </div>
+</div>
 <footer>
     <p>© 2024 PolyNames</p>
 </footer>
-<script src="main.js"></script>
+<script src="main.js" type="module"></script>
 </body>
 </html>
