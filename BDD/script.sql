@@ -1,9 +1,3 @@
-Player(id, username, game_id)
-game(id, code, score)
-Word(id, label)
-Participate(id, role, player_id, game_id)
-Include(id, color, game_id, word_id)
-
 CREATE DATABASE IF NOT EXISTS poly_names;
 USE poly_names;
 
@@ -46,7 +40,6 @@ CREATE TABLE Include (
     FOREIGN KEY (word_id) REFERENCES Word(id)
 );
 
------------------------------------------------------------------------------------------------------------------------------
 USE poly_names;
 
 INSERT INTO Word (label) VALUES 

@@ -58,8 +58,6 @@ K
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-K
-frontend/testing/index.html,7\e\7ebfad01a54e58cd4a20f35732a60f6e3fadccf2
 H
 frontend/styles-mots.css,b\f\bf6832d02d0e2311bdb658a5cf12f5b619d08d3e
 C
@@ -70,20 +68,14 @@ N
 frontend/main.js,7\d\7d3c6f4d87d4e82954c505e36bf7b521fc41404a
 [
 +src/webserver/WebServerSSEEventHandler.java,2\b\2bb4dcf0ff1f15bc5a2064754d46f35528c08ec5
-N
-frontend/create_join_game.html,4\4\441ab8516f02554d499fdd17adcd87ada016de83
 L
 frontend/grid_intuition.html,3\c\3c7d2a87559946af2f0ec972f79bda9390d414e2
 I
 frontend/grid_master.html,8\8\883ac84f33af429437144e3c02f19e089f07728b
-Q
-!src/Controller/SSEController.java,7\c\7c10e5a2229675aa651580a7c4aa8358bf85f734
 ^
 .extra/daw-fulstack/frontend/libs/sse-client.js,3\1\3143a8d9f9af9e1a6adf6370de38f5e84a381623
 C
 frontend/roles.html,2\3\23ab4049086dd6f5b79f337c5af5c0c641d09594
-D
-frontend/services.js,f\9\f94ecb3deb55d33b2cd1761f4daf21b355548847
 R
 "src/webserver/WebServerRouter.java,7\b\7bb70ac234911c62d0d30be5a6a0cb0236f808c4
 T
@@ -92,8 +84,6 @@ X
 (src/webserver/WebServerSSEEventType.java,e\4\e439acef0f6cfad016336188a9ff81cf5ff1c935
 Q
 !frontend/services/game-service.js,3\9\39b0f8d2d5197e98ee9d37e2eb19d35d4b975ceb
-K
-frontend/views/game-view.js,e\1\e1c0ac388670c7411dd5c2b082b966d35af22565
 S
 #frontend/services/player-service.js,d\f\dfa0fd13213ad7709d11374af6adbc418fe83c46
 C
