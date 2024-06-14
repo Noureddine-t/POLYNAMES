@@ -1,5 +1,5 @@
 package models;
 
 public enum Role {
-    WORD_MASTER, INTUITION_MASTER
+    maitre_des_mots, maitre_des_intuitions, aleatoire
 }

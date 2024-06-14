@@ -5,4 +5,5 @@ public record Participate(
         Role role,
         int game_id,
         int player_id
-){}
+) {
+}

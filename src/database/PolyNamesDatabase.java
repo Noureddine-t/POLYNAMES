@@ -2,6 +2,9 @@ package database;
 
 import java.sql.SQLException;
 
+/**
+ * Base de données du jeu polyNames
+ */
 public class PolyNamesDatabase extends MySQLDatabase {
     private static final String URL = "127.0.0.1";
     private static final int PORT = 3306;

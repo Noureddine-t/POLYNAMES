@@ -2,7 +2,6 @@ package DAO;
 
 import database.PolyNamesDatabase;
 import models.Game;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,14 +24,13 @@ public class GameDAO {
         }
     }
 
-
     /**
      * Créer une partie de jeu
      *
      * @return identifiant de la partie créée
      */
     public String createGame() {
-        String query = "INSERT INTO game (code) VALUES (?)";
+        String query = "INSERT INTO GAME (code) VALUES (?)";
 
         while (true) {
             String code = UUID.randomUUID().toString();
@@ -59,7 +57,7 @@ public class GameDAO {
      * @return La partie de jeu correspondant à l'identifiant gameId
      */
     public Game findGameById(int gameId) {
-        String query = "SELECT * FROM game WHERE id = ?";
+        String query = "SELECT * FROM GAME WHERE id = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setInt(1, gameId);
@@ -84,7 +82,7 @@ public class GameDAO {
      * @return La partie de jeu correspondant au code
      */
     public Game findGameByCode(String code) {
-        String query = "SELECT * FROM game WHERE code = ?";
+        String query = "SELECT * FROM GAME WHERE code = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setString(1, code);
@@ -109,7 +107,7 @@ public class GameDAO {
      * @param code     code de la partie
      */
     public void updateScore(int newScore, String code) {
-        String query = "UPDATE game SET score = ? WHERE code = ?";
+        String query = "UPDATE GAME SET score = ? WHERE code = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setInt(1, newScore);
@@ -127,7 +125,7 @@ public class GameDAO {
      * @param id       identifiant de la partie
      */
     public void updateScore(int newScore, int id) {
-        String query = "UPDATE game SET score = ? WHERE id = ?";
+        String query = "UPDATE GAME SET score = ? WHERE id = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setInt(1, newScore);
@@ -144,7 +142,7 @@ public class GameDAO {
      * @param gameId identifiant de la partie
      */
     public void deleteGame(int gameId) {
-        String query = "DELETE FROM game WHERE id = ?";
+        String query = "DELETE FROM GAME WHERE id = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setInt(1, gameId);
@@ -160,9 +158,8 @@ public class GameDAO {
      *
      * @param code code de la partie
      */
-
     public void deleteGame(String code) {
-        String query = "DELETE FROM game WHERE code = ?";
+        String query = "DELETE FROM GAME WHERE code = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setString(1, code);

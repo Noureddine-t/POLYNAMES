@@ -4,7 +4,6 @@ import DAO.GameDAO;
 import DAO.PlayerDAO;
 import webserver.WebServerContext;
 
-
 /**
  * Contrôleur pour la gestion des joueurs
  */
@@ -24,7 +23,7 @@ public class PlayerController {
         int gameId = new GameDAO().findGameByCode(gameCode).id();
         playerDAO.createPlayer(name, gameId);
 
-        context.getResponse().ok("Player" + name + "created successfully");
+        context.getResponse().ok("Player " + name + " created successfully");
     }
 
 

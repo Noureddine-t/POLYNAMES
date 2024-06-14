@@ -3,7 +3,6 @@ package DAO;
 import database.PolyNamesDatabase;
 import models.Participate;
 import models.Role;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +32,7 @@ public class ParticipateDAO {
      * @param player_id identifiant du joueur
      */
     public void createParticipate(Role role, int game_id, int player_id) {
-        String query = "INSERT INTO participate (role, game_id, player_id) VALUES (?, ?, ?)";
+        String query = "INSERT INTO PARTICIPATE (role, game_id, player_id) VALUES (?, ?, ?)";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setString(1, role.name());
@@ -45,27 +44,6 @@ public class ParticipateDAO {
         }
     }
 
-
-    /**
-     * Mettre à jour le rôle d'une participation
-     *
-     * @param id      identifiant de la participation
-     * @param newRole nouveau rôle du joueur
-     */
-    //TODO DELETE THIS
-    public void updateRole(int id, String newRole) {
-        String query = "UPDATE participate SET role = ? WHERE id = ?";
-        try {
-            PreparedStatement preparedStatement = this.db.prepareStatement(query);
-            preparedStatement.setString(1, newRole);
-            preparedStatement.setInt(2, id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la mise à jour du role de l'instance Participate : " + e.getMessage());
-        }
-    }
-
-
     /**
      * Lire une participation à partir de son identifiant
      *
@@ -73,7 +51,7 @@ public class ParticipateDAO {
      * @return la participation correspondant à l'identifiant id
      */
     public Participate getParticipate(int id) {
-        String query = "SELECT * FROM participate WHERE id = ?";
+        String query = "SELECT * FROM PARTICIPATE WHERE id = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setInt(1, id);
@@ -102,7 +80,7 @@ public class ParticipateDAO {
      */
     public Participate getParticipate(int gameId, int playerId) {
         String role = null;
-        String query = "SELECT * FROM participate WHERE game_id = ? AND player_id = ?";
+        String query = "SELECT * FROM PARTICIPATE WHERE game_id = ? AND player_id = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setInt(1, gameId);

@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS poly_names;
 USE poly_names;
 
-CREATE TABLE Game (
+CREATE TABLE GAME (
     id INT AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(255) NOT NULL,
     UNIQUE (code),
@@ -9,40 +9,40 @@ CREATE TABLE Game (
 );
 
 
-CREATE TABLE Player (
+CREATE TABLE PLAYER (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     game_id INT,
-    FOREIGN KEY (game_id) REFERENCES Game(id)
+    FOREIGN KEY (game_id) REFERENCES GAME(id)
 );
 
 
-CREATE TABLE Word (
+CREATE TABLE WORD (
     id INT AUTO_INCREMENT PRIMARY KEY,
     label VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Participate (
+CREATE TABLE PARTICIPATE (
     id INT AUTO_INCREMENT PRIMARY KEY,
     role VARCHAR(255) NOT NULL,
     player_id INT,
     game_id INT,
-    FOREIGN KEY (player_id) REFERENCES Player(id),
-    FOREIGN KEY (game_id) REFERENCES Game(id)
+    FOREIGN KEY (player_id) REFERENCES PLAYER(id),
+    FOREIGN KEY (game_id) REFERENCES GAME(id)
 );
 
-CREATE TABLE Include (
+CREATE TABLE INCLUDE (
     id INT AUTO_INCREMENT PRIMARY KEY,
     color VARCHAR(255) NOT NULL,
     game_id INT,
     word_id INT,
-    FOREIGN KEY (game_id) REFERENCES Game(id),
-    FOREIGN KEY (word_id) REFERENCES Word(id)
+    FOREIGN KEY (game_id) REFERENCES GAME(id),
+    FOREIGN KEY (word_id) REFERENCES WORD(id)
 );
 
 USE poly_names;
 
-INSERT INTO Word (label) VALUES 
+INSERT INTO WORD (label) VALUES 
 ('AFRIQUE'), ('AIGUILLE'), ('AILE'), ('AIR'), ('ALIEN'), ('ALLEMAGNE'), ('ALPES'), ('AMOUR'), ('AMPOULE'), 
 ('AMÉRIQUE'), ('ANGE'), ('ANGLETERRE'), ('ANNEAU'), ('APPAREIL'), ('ARAIGNÉE'), ('ARC'), ('ARGENT'), 
 ('ASILE'), ('ASTÉRIX'), ('ATLANTIQUE'), ('ATOUT'), ('AUSTRALIE'), ('AVION'), ('AVOCAT'), ('BAGUETTE'), 

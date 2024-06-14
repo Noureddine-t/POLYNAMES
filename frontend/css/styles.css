@@ -1,0 +1,142 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    font-size: 5em;
+    font-weight: bold;
+    color: #0044cc;
+    text-shadow: 2px 2px 4px #aaa;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 100px);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
+    padding: 20px;
+    background: #e0f7fa;
+    border-radius: 10px;
+    border: 1px solid #0044cc;
+}
+
+label {
+    margin: 10px 0;
+    color: #0044cc;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #0044cc;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #000000;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 20px 0;
+    background: #0044cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #003399;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.grid div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #ddd;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.hint, .score, .hint-received, .history {
+    margin: 10px 0;
+}
+
+#history-list {
+    list-style-type: none;
+    padding: 0;
+}
+footer {
+    background-color: #0044cc;
+    color: white;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+}
+
+#redirect-button {
+    padding: 10px 20px;
+    margin: 20px 0;
+    background: #0044cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#redirect-button:hover {
+    background: #003399;
+}

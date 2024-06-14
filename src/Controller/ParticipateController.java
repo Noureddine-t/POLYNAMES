@@ -5,8 +5,7 @@ import DAO.ParticipateDAO;
 import DAO.PlayerDAO;
 import models.Role;
 import webserver.WebServerContext;
-
-import java.util.Random;
+import java.util.*;
 
 /**
  * Contrôleur pour la gestion des participations
@@ -24,17 +23,21 @@ public class ParticipateController {
         String roleName = context.getRequest().getParam("role");
 
         Role role;
-        if (roleName == null || roleName.isEmpty()) {
-            // Choir un role arbitrairement
-            role = Role.values()[new Random().nextInt(Role.values().length)];
+        if (roleName.equals("aleatoire")) {
+            // Choisir un role arbitrairement, en excluant 'aleatoire' pour éviter de le sélectionner par hasard
+            Role[] roles = Role.values();
+            role = roles[new Random().nextInt(roles.length - 1)];
         } else {
             role = Role.valueOf(roleName);
         }
 
-        //Crtéation de participation
         int gameId = new GameDAO().findGameByCode(gameCode).id();
         int playerId = new PlayerDAO().findPlayerByUserNameAndGameId(username, gameId).id();
-        participateDAO.createParticipate(role, playerId, gameId);
-        context.getResponse().ok("Player " + username + " associated to role " + role.name() + " successfully");
+        participateDAO.createParticipate(role, gameId, playerId);
+
+        // Indiquer dans la réponse HTTP le rôle assigné
+        Map<String, String> responseMap = new HashMap<>();
+        responseMap.put("role", role.name());
+        context.getResponse().json(responseMap);
     }
 }

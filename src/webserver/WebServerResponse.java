@@ -78,23 +78,4 @@ public class WebServerResponse {
 
         return this.exchange.getResponseBody();
     }
-
-    /**
-     * Send a file as a response
-     * @param filePath path to the file
-     */
-    public void htmlFile(String filePath) {
-        this.initCors();
-        try {
-            byte[] bytes = Files.readAllBytes(Paths.get(filePath));
-            Headers headers = this.exchange.getResponseHeaders();
-            headers.add("Content-Type", "text/html");
-            this.exchange.sendResponseHeaders(200, bytes.length);
-            OutputStream os = this.exchange.getResponseBody();
-            os.write(bytes);
-            os.close();
-        } catch (IOException e) {
-            this.serverError("Could not read file: " + filePath);
-        }
-    }
 }

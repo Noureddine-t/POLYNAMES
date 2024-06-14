@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer / Rejoindre une partie</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <header>
@@ -12,25 +12,28 @@
 </header>
 <div class="container">
     <div class="form-container box">
-        <form action="#" method="post">
+        <form action="" method="post">
             <h2>Créer une partie</h2>
             <label for="username-create">Nom d'utilisateur:</label>
             <input type="text" id="username-create" name="username-create" required>
-            <button type="submit">Créer</button>
+            <button id="create-game-btn" type="button">Créer</button>
         </form>
-        <form action="#" method="post">
+        <div id="game-code-div">
+            <p id="game-code"></p>
+        </div>
+        <form action="" method="post">
             <h2>Rejoindre une partie</h2>
             <label for="username-join">Nom d'utilisateur:</label>
             <input type="text" id="username-join" name="username-join" required>
             <label for="game-code-join">Code de la partie:</label>
             <input type="text" id="game-code-join" name="game-code-join" required>
-            <button type="submit">Rejoindre</button>
+            <button id="join-btn" type="submit">Rejoindre</button>
         </form>
     </div>
 </div>
 <footer>
     <p>© 2024 PolyNames</p>
 </footer>
-<script src="main.js" type="module"></script>
+<script src="js/pagesController/mainIndex.js" type="module"></script>
 </body>
 </html>

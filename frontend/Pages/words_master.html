@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grille de jeu Maître des mots</title>
+    <link rel="stylesheet" href="../css/styles-words.css">
+</head>
+<body>
+<header>
+    <h1>PolyNames</h1>
+</header>
+<div class="container">
+    <div class="game-container">
+        <div class="grid-container">
+            <h2>Grille de jeu - Maître des mots</h2>
+            <div class="grid" id="game-grid">
+                <!-- Les éléments de la grille  -->
+            </div>
+        </div>
+        <div class="side-content">
+            <div class="hint">
+                <label for="hint">Indice:</label>
+                <input type="text" id="hint" name="hint">
+            </div>
+            <div class="hint-number">
+                <label for="number">Nombre correspondant:</label>
+                <input type="number" id="number" name="number">
+            </div>
+            <button type="button" id="send-hint">Envoyer l'indice</button>
+            <div class="score">
+                <h3>Score:</h3>
+                <p id="score">0</p>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <p>© 2024 PolyNames</p>
+</footer>
+<script src="../js/pagesController/mainWordsMaster.js" type="module"></script>
+</body>
+</html>

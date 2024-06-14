@@ -5,4 +5,5 @@ public record Include(
         WordColor color,
         int game_id,
         int word_id
-){}
+) {
+}

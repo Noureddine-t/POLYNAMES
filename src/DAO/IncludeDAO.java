@@ -3,10 +3,11 @@ package DAO;
 import database.PolyNamesDatabase;
 import models.Include;
 import models.WordColor;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * DAO des inclusions, permettant de gérer les associations entre les parties et les mots avec leurs couleurs
@@ -33,7 +34,7 @@ public class IncludeDAO {
      * @param word_id identifiant du mot
      */
     public void createInclude(WordColor color, int game_id, int word_id) {
-        String query = "INSERT INTO include (word_id, game_id, color) VALUES (?, ?, ?)";
+        String query = "INSERT INTO INCLUDE (word_id, game_id, color) VALUES (?, ?, ?)";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setInt(1, word_id);
@@ -46,10 +47,16 @@ public class IncludeDAO {
         }
     }
 
-
+    /**
+     * Lire une inclusion à partir de l'identifiant de la partie et du mot
+     *
+     * @param gameId identifiant de la partie
+     * @param wordId identifiant du mot
+     * @return l'inclusion correspondant à la partie et au mot
+     */
     public Include getInclude(int gameId, int wordId) {
         Include include = null;
-        String query = "SELECT * FROM include WHERE game_id = ? AND word_id = ?";
+        String query = "SELECT * FROM INCLUDE WHERE game_id = ? AND word_id = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setInt(1, gameId);
@@ -79,7 +86,7 @@ public class IncludeDAO {
      */
     public Include getInclude(int id) {
         Include include = null;
-        String query = "SELECT * FROM include WHERE id = ?";
+        String query = "SELECT * FROM INCLUDE WHERE id = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setInt(1, id);
@@ -100,13 +107,42 @@ public class IncludeDAO {
     }
 
     /**
+     * Lire toutes les inclusions d'une partie
+     *
+     * @param gameId identifiant de la partie
+     * @return la liste des inclusions de la partie
+     */
+    public List<Include> allGameIncludes(int gameId) {
+        List<Include> includes = new ArrayList<>();
+        String query = "SELECT * FROM INCLUDE WHERE game_id = ?";
+        try {
+            PreparedStatement preparedStatement = this.db.prepareStatement(query);
+            preparedStatement.setInt(1, gameId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Include include = new Include(
+                        resultSet.getInt("id"),
+                        WordColor.valueOf(resultSet.getString("color")),
+                        resultSet.getInt("game_id"),
+                        resultSet.getInt("word_id")
+                );
+                includes.add(include);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la lecture des instances Include : " + e.getMessage());
+        }
+        return includes;
+    }
+
+
+    /**
      * Mettre à jour la couleur d'une inclusion
      *
      * @param id       identifiant de l'inclusion
      * @param newColor nouvelle couleur
      */
     public void updateColor(int id, String newColor) {
-        String query = "UPDATE include SET color = ? WHERE id = ?";
+        String query = "UPDATE INCLUDE SET color = ? WHERE id = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setString(1, newColor);
@@ -125,7 +161,7 @@ public class IncludeDAO {
      * @param newColor nouvelle couleur
      */
     public void updateColor(int gameId, int wordId, WordColor newColor) {
-        String query = "UPDATE include SET color = ? WHERE game_id = ? AND word_id = ?";
+        String query = "UPDATE INCLUDE SET color = ? WHERE game_id = ? AND word_id = ?";
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(query);
             preparedStatement.setString(1, newColor.name());
@@ -146,9 +182,9 @@ public class IncludeDAO {
      * @param newColor nouvelle couleur
      */
     public void updateColor(String code, String label, WordColor newColor) {
-        String getGameIdQuery = "SELECT id FROM game WHERE code = ?";
-        String getWordIdQuery = "SELECT id FROM word WHERE label = ?";
-        String updateColorQuery = "UPDATE include SET color = ? WHERE game_id = ? AND word_id = ?";
+        String getGameIdQuery = "SELECT id FROM GAME WHERE code = ?";
+        String getWordIdQuery = "SELECT id FROM WORD WHERE label = ?";
+        String updateColorQuery = "UPDATE INCLUDE SET color = ? WHERE game_id = ? AND word_id = ?";
 
         try {
             PreparedStatement preparedStatement = this.db.prepareStatement(getGameIdQuery);
